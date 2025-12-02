@@ -1,47 +1,32 @@
 import ModeToggle from "@/components/ui/mode-toggle";
-import { Pattern } from "@/components/ui";
-import { libraries } from "@/constants/data";
-import { Github, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
-    <>
-      <Pattern>
-        <div className="h-[100dvh] relative z-10 center flex-col gap-10 text-center layout">
-          <div className="center gap-2">
-            <a
-              href="https://github.com/learnwithjacksun/my-react-template"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="border border-line rounded-full bg-secondary/70 px-4 py-2 center gap-20 inline-flex "
-            >
-              <div className="center gap-2">
-                <Github size={18} className="text-main/70" />
-                <p className="text-sm">Use Template</p>
-              </div>
-              <ArrowRight size={20} className="text-main/70" />
-            </a>
-          </div>
-          <div className="space-y-2">
-            <h1 className="text-6xl md:leading-[80px] leading-[60px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-main to-main/70 dark:to-main/50">
-              My Reactjs Template
-            </h1>
-            <p className="text-muted text-sm">With typescript.</p>
-          </div>
+    <div className="h-[100dvh] w-full flex flex-col items-center justify-center gap-8 px-6 text-center"
+      style={{ backgroundColor: "var(--color-background)", color: "var(--color-main)" }}
+    >
+      {/* BRAND */}
+      <div className="flex flex-col gap-2">
+        <h1 className="text-4xl font-extrabold" style={{ color: "var(--color-main)" }}>
+          Fintech App
+        </h1>
+        <p className="text-small">Fast · Secure · Modern</p>
+      </div>
 
-          <ul className="center flex-wrap gap-2">
-            {libraries.map((library) => (
-              <li
-                key={library}
-                className="text-sm text-muted dark:bg-secondary border border-line rounded-full px-4 py-2"
-              >
-                {library}
-              </li>
-            ))}
-          </ul>
-          <ModeToggle />
-        </div>
-      </Pattern>
-    </>
+      {/* CTA */}
+      <button
+        className="btn-primary px-7 py-3 flex items-center gap-2 text-[15px]"
+      >
+        Get Started
+        <ArrowRight size={18} />
+      </button>
+
+      {/* FOOTER / MODE TOGGLE */}
+      <div className="absolute bottom-12 flex flex-col items-center gap-4">
+        <ModeToggle />
+        <p className="text-small">Powered by React & TypeScript</p>
+      </div>
+    </div>
   );
 }
