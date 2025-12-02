@@ -1,73 +1,61 @@
-export default function Home() {
+export default function Home {
   return (
     <div
-      className="page center"
+      className="center"
       style={{
         minHeight: "100vh",
-        width: "100%",
-        backgroundColor: "var(--color-primary)", // BLUE BACKGROUND
-        color: "white",
-        flexDirection: "column",
-        gap: "30px",
-        padding: "20px"
+        background: "var(--color-primary)", // BLUE BACKGROUND (Opay style)
+        padding: "20px",
       }}
     >
-      {/* Logo circle */}
+      {/* White mobile card */}
       <div
+        className="card"
         style={{
-          width: 90,
-          height: 90,
-          borderRadius: "50%",
-          background: "rgba(255,255,255,0.15)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          width: "100%",
+          maxWidth: 380,
+          background: "white",
+          borderRadius: 20,
+          padding: "35px 25px",
+          textAlign: "center",
         }}
       >
-        <h1 style={{ fontSize: 34, fontWeight: 800, color: "white" }}>S</h1>
-      </div>
-
-      {/* Text */}
-      <div style={{ textAlign: "center", maxWidth: 280 }}>
-        <h1 style={{ fontSize: 30, fontWeight: 800, lineHeight: "1.2" }}>
-          Save Automatically
-        </h1>
-        <p style={{ marginTop: 10, opacity: 0.9 }}>
-          Build better savings habits with automated daily or weekly deposits.
-        </p>
-      </div>
-
-      {/* Buttons */}
-      <div className="flex flex-col items-center gap-3 w-full">
-        <button
-          className="btn"
+        {/* Illustration circle */}
+        <div
           style={{
-            width: 260,
-            padding: "13px 0",
-            background: "white",
-            color: "var(--color-primary)",
-            fontWeight: 700,
-            borderRadius: 10,
+            width: 90,
+            height: 90,
+            borderRadius: "50%",
+            background: "var(--accent)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "0 auto 25px auto",
+          }}
+        >
+          <h1 style={{ fontSize: 34, fontWeight: 700, color: "var(--color-primary)" }}>
+            S
+          </h1>
+        </div>
+
+        {/* Text */}
+        <h2 style={{ fontSize: 26, fontWeight: 800, marginBottom: 10 }}>Save Automatically</h2>
+        <p className="text-small" style={{ marginBottom: 25 }}>
+          Build a better savings habit with daily, weekly, or smart automated deposits.
+        </p>
+
+        {/* Button */}
+        <button
+          className="btn-primary"
+          style={{
+            width: "100%",
+            padding: "14px 0",
+            borderRadius: 12,
+            fontSize: 15,
           }}
           onClick={() => (window.location.href = "/signup")}
         >
-          Create Account
-        </button>
-
-        <button
-          className="btn"
-          style={{
-            width: 260,
-            padding: "13px 0",
-            background: "transparent",
-            color: "white",
-            border: "1px solid rgba(255,255,255,0.7)",
-            fontWeight: 600,
-            borderRadius: 10
-          }}
-          onClick={() => (window.location.href = "/login")}
-        >
-          Login
+          Get Started
         </button>
       </div>
     </div>
