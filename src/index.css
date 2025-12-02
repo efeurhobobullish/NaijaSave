@@ -4,26 +4,37 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ---------- COLOR PALETTE (White + Blue theme) ---------- */
+/* Primary blue: #0b5fff (vibrant)
+   Deep navy for readable text (not black): #06213A
+   Light blue accents: #E8F0FF
+*/
 :root {
-  --background: #ffffff;
-  --secondary: #f9f9f9;
-  --foreground: #f5f5f5;
-  --main: #444;
-  --muted: #999999;
-  --primary: #222;
-  --line: #f1f1f1;
+  --background: #ffffff;       /* page bg */
+  --secondary: #f6f9ff;        /* light card bg */
+  --foreground: #ffffff;       /* surface / card fg */
+  --main: #06213A;             /* primary text (deep navy, NOT black) */
+  --muted: #6b7280;            /* muted / secondary text */
+  --primary: #0b5fff;          /* primary brand blue */
+  --primary-600: #074ed6;      /* slightly darker blue */
+  --line: #eef2ff;            /* divider */
+  --accent: #e8f0ff;          /* very light blue */
 }
 
+/* Dark mode — keep blue as brand color but invert backgrounds */
 .dark {
-  --background: #0a0a0a;
-  --foreground: #212121;
-  --main: #fefefe;
-  --secondary: #121212;
-  --muted: #999999;
-  --line: #212121;
-  --primary: #fefefe;
+  --background: #071331;     /* deep navy background */
+  --foreground: #0b2440;     /* dark surface */
+  --secondary: #061b34;      /* card bg (dark) */
+  --main: #e6f0ff;           /* light text (blue-tinted white) */
+  --muted: #94a3b8;          /* muted text in dark */
+  --primary: #0b5fff;        /* keep brand blue */
+  --primary-600: #7fb3ff;    /* lighter blue for emphasis */
+  --line: #0b2546;
+  --accent: #06213a;
 }
 
+/* Theme mapping for Tailwind-like usage */
 @theme inline {
   --font-sans: "Plus Jakarta Sans", sans-serif;
   --color-background: var(--background);
@@ -35,14 +46,22 @@
   --color-primary: var(--primary);
 }
 
-*{
-  @apply outline-none
+/* ---------- GLOBAL APPLIES ---------- */
+* {
+  @apply outline-none;
+  box-sizing: border-box;
 }
 
 body {
- @apply bg-background text-main font-sans;
+  /* use the theme variables so your existing utility classes pick up new palette */
+  background-color: var(--color-background);
+  color: var(--color-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* sizing wrappers you already use */
 .main {
   @apply max-w-[90%] 2xl:max-w-[1280px] mx-auto;
 }
@@ -55,20 +74,103 @@ body {
   @apply flex items-center justify-center;
 }
 
+/* ---------- BUTTONS & FORMS (blue primary, white text) ---------- */
 button,
 .btn {
   @apply cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50;
+  border-radius: 10px;
+  transition: background-color 0.12s ease, transform 0.06s ease;
 }
 
+/* Primary button — blue background, white text; darker on active/hover */
 .btn-primary {
-  @apply text-white dark:text-[#171717] bg-primary font-semibold;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border: none;
+  box-shadow: 0 6px 18px rgba(11,95,255,0.08);
+}
+.btn-primary:hover {
+  background-color: var(--primary-600);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
 }
 
+/* Secondary / ghost button — blue outline on white */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--line);
+}
+
+/* Inputs */
+.input {
+  @apply px-4 py-3 rounded-lg;
+  border: 1px solid var(--line);
+  background: var(--color-foreground);
+  color: var(--color-main);
+}
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+/* small text utility */
+.text-small {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+/* simple card */
+.card {
+  background: var(--color-foreground);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 30px rgba(6,33,58,0.04);
+  border: 1px solid var(--line);
+}
+
+/* lines / dividers */
+.hr {
+  height: 1px;
+  background: var(--line);
+  margin: 1rem 0;
+}
+
+/* Progress / accent */
+.badge {
+  background: var(--accent);
+  color: var(--color-primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* hide scrollbar helper */
 .hide-scrollbar::-webkit-scrollbar {
   @apply hidden;
 }
-
 .hide-scrollbar::-webkit-scrollbar-thumb {
   @apply hidden;
 }
 
+/* OTP input styling helper (uses inline letter-spacing where needed by components) */
+.otp {
+  letter-spacing: 8px;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--color-foreground);
+  color: var(--color-main);
+}
+
+/* responsive tweaks */
+@media (max-width: 640px) {
+  .card { padding: 1rem; border-radius: 10px; }
+  .main { max-width: 95%; }
+}
